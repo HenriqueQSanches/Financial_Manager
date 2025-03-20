@@ -24,56 +24,7 @@ Bem-vindo ao **Gerenciador Financeiro Simples**! Este é um aplicativo básico d
 
 ## 📂 Estrutura do Projeto
 
-### **Frontend**
-frontend/
-├── index.html              # Arquivo HTML principal
-├── package.json            # Configurações do projeto e dependências
-├── vite.config.js          # Configuração do Vite
-├── public/                 # Arquivos estáticos (opcional)
-│   └── (ex.: imagens, ícones)
-├── src/                    # Código-fonte do React
-|   ├── assets
-│   ├── App.jsx             # Componente principal
-│   ├── main.jsx            # Ponto de entrada do React
-│   ├── styles/             # Estilos globais
-│   │   └── global.css      # Estilos globais para a aplicação
-│   ├── services/           # Serviços para consumir APIs
-│   │   └── api.js          # Configuração da API
-│   ├── context/            # Context API (opcional, para estado global)
-│   │   └── AuthContext.jsx # Contexto de autenticação
-│   ├── components/         # Componentes reutilizáveis
-│   │   ├── Header.jsx      # Componente de cabeçalho
-│   │   └── Footer.jsx      # Componente de rodapé
-│   ├── pages/              # Páginas principais da aplicação
-│   │   ├── Login.jsx       # Página de login
-│   │   ├── Register.jsx    # Página de registro
-│   │   └── Home.jsx        # Página inicial
-└── ...
-
-### **Backend**
-backend/
-├── .env                    # Variáveis de ambiente
-├── package.json            # Configurações do projeto e dependências
-├── package-lock.json            
-├── src/                    # Código-fonte do backend
-│   ├── app.js              # Configuração principal do servidor
-│   ├── server.js           # Inicialização do servidor
-│   ├── database/           # Configuração do banco de dados
-│   │   └── db.js           # Configuração do SQLite
-│   ├── routes/             # Rotas da aplicação
-│   │   └── authRoutes.js   # Rotas de autenticação
-│   │   └── financialRoutes.js # Rotas de gerenciamento financeiro
-│   ├── controllers/        # Lógica das rotas
-│   │   └── authController.js # Controlador de autenticação
-│   │   └── financialController.js # Controlador de finanças
-│   ├── models/             # Modelos de dados
-│   │   └── User.js         # Modelo de usuário
-│   │   └── Transaction.js  # Modelo de transação
-│   ├── middleware/         # Middlewares
-│   │   └── auth.js         # Middleware de autenticação
-│   ├── utils/              # Utilitários
-│   │   └── helpers.js      # Funções auxiliares
-└── ...
+### **Está detalhadamente explicado na pasta "Documentações"**
 
 ---
 
