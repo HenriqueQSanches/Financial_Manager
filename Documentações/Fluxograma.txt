@@ -1,0 +1,17 @@
+                                                    EXPLICAÇÕES PARA MIM MESMO
+
+-------------------------------------------------------------
+Fluxograma detalhado:                                       | 
+                                                            |
+-> Index.html                                               |
+  -> main.jsx                                               |
+   -> App.jsx                                               |
+    -> Outros componentes (Login, Navbar, Register e etc)   |
+                                                            |
+-------------------------------------------------------------
+
+-----------------------------------------------------------------------------------------------------------
+Gosto de manter explicações assim para mim mesmo, sou uma pessoa que precisa sempre se certificar do que
+estou fazendo, para não cometer erros ridiculos. 
+
+-----------------------------------------------------------------------------------------------------------

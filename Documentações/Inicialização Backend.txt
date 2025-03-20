@@ -1,0 +1,26 @@
+                                Criação do NodeJS dentro do meu diretório "backend"
+-> npm init -y
+ -> npm install express sqlite3 dotenv cors
+
+    -> Instalei o Express, Sqlite (o projeto será apenas para treino, por isso fiz o uso do Sqlite)
+        -> dotenv para as variáveis de ambiente e cors para permitir a comunicação do front com back.
+            -> Express padrão, para servidor e rotas.
+
+
+-----------------------------------------------------------------------------------------------------------
+ESTRUTURA IDEAL PARA O PROJETO:
+backend/
+├── .env                    # Variáveis de ambiente
+├── package.json            # Configurações do projeto e dependências
+├── package-lock.json            
+├── src/                    # Código-fonte do backend
+│   ├── app.js              # Configuração principal do servidor
+│   ├── server.js           # Inicialização do servidor
+│   ├── database/           # Configuração do banco de dados
+│   │   └── db.js           # Configuração do SQLite
+│   ├── routes/             # Rotas da aplicação
+│   │   └── authRoutes.js   # Rotas de autenticação
+│   ├── controllers/        # Lógica das rotas
+│   │   └── authController.js # Controlador de autenticação
+└── ...
+-----------------------------------------------------------------------------------------------------------
