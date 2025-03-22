@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 // Componente cabeçalho \\
 
 import { AppBar, Toolbar, Typography, Button, Box, IconButton } from '@mui/material';
@@ -82,3 +83,6 @@ function Header({ toggleTheme, mode }) {
 }
 
 export default Header;
+=======
+// Componente cabeçalho \\
+>>>>>>> d80e0aeca640f14d542413b78098fefd9ab9f7b5
