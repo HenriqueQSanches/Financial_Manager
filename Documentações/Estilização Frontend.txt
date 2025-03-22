@@ -1,0 +1,50 @@
+ESTILIZAÇÃO INICIAL DA APLICAÇÃO
+-> Instalei o Material UI e React Icons
+ -> npm install @mui/material @emotion/react @emotion/styled @mui/icons-material react-icons
+
+-----------------------------------------------------------------------------------------------------------
+TEMA ESCURO/CLARO:
+Criei um esquema de tema com as seguintes características:
+
+Cores no Tema Escuro:
+├── Cor Principal: #90caf9 (um azul suave)
+├── Background: #121212 (quase preto)
+├── Papel/Componentes: #1e1e1e (cinza muito escuro)
+└── Textos: #ffffff (branco) e #bdbdbd (cinza claro)
+
+Cores no Tema Claro:
+├── Cor Principal: #1976d2 (azul mais vibrante)
+├── Background: #f5f5f5 (cinza bem clarinho)
+├── Papel/Componentes: #ffffff (branco)
+└── Textos: #000000 (preto) e #666666 (cinza escuro)
+
+-----------------------------------------------------------------------------------------------------------
+ESTRUTURA DOS COMPONENTES:
+Header/
+├── Logotipo com ícone de carteira
+├── Título do sistema
+├── Botão de alternar tema (aquele solzinho/luazinha)
+└── Botões de Login e Registro
+
+Página Inicial/
+├── Título de boas-vindas
+├── Texto explicativo
+└── Botões de ação (Login/Registro)
+
+-----------------------------------------------------------------------------------------------------------
+OBSERVAÇÕES PRA MIM MESMO:
+1. Mantive as transições suaves (0.3s) pra não ficar aquela mudança bruta
+2. Todos os componentes seguem o mesmo padrão de cores do tema
+3. Os botões têm hover state personalizado
+4. Adicionei efeitos sutis tipo aquele background no hover do ícone de tema
+5. Usei o Paper como wrapper pra garantir que todo o conteúdo mude de cor
+
+-----------------------------------------------------------------------------------------------------------
+PRÓXIMOS PASSOS:
+1. Criar as páginas de Login e Registro
+2. Configurar as rotas
+3. Fazer a conexão com o backend
+4. Implementar o dashboard financeiro
+
+(Sempre bom deixar anotado pra não esquecer o que falta fazer)
+-----------------------------------------------------------------------------------------------------------
