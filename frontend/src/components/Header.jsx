@@ -3,6 +3,7 @@
 import { AppBar, Toolbar, Typography, Button, Box, IconButton } from '@mui/material';
 import { FaWallet } from 'react-icons/fa';
 import { MdLightMode, MdDarkMode } from 'react-icons/md';
+import './Header.css';
 
 function Header({ toggleTheme, mode }) {
   return (
