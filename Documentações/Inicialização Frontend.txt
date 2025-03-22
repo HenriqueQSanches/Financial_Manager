@@ -1,34 +1,80 @@
-                                Criação do React + Vite dentro do meu diretório "frontend"
+Criação do React + Vite dentro do meu diretório "frontend"
 -> npx create-vite@latest .
  -> Selecionei o ReactJS
   -> cd frontend
    -> npm install
-
+   -> npm install @mui/material @emotion/react @emotion/styled react-icons
 
 -----------------------------------------------------------------------------------------------------------
-ESTRUTURA IDEAL PARA O PROJETO:
+ESTRUTURA ATUAL DO PROJETO:
 frontend/
 ├── index.html              # Arquivo HTML principal
 ├── package.json            # Configurações do projeto e dependências
 ├── vite.config.js          # Configuração do Vite
-├── public/                 # Arquivos estáticos (opcional)
-│   └── (ex.: imagens, ícones)
+├── public/                 # Arquivos estáticos
+│   └── vite.svg           # Ícone padrão do Vite
 ├── src/                    # Código-fonte do React
-|   ├── assets
-│   ├── App.jsx             # Componente principal
-│   ├── main.jsx            # Ponto de entrada do React
-│   ├── styles/             # Estilos globais
-│   │   └── global.css      # Estilos globais para a aplicação
-│   ├── services/           # Serviços para consumir APIs
-│   │   └── api.js          # Configuração da API
-│   ├── context/            # Context API (opcional, para estado global)
+│   ├── assets/            # Recursos estáticos
+│   │   └── react.svg      # Logo do React
+│   ├── components/        # Componentes reutilizáveis
+│   │   ├── Header/        # Componente de cabeçalho
+│   │   │   ├── index.jsx  # Lógica do componente
+│   │   │   └── styles.css # Estilos específicos
+│   │   ├── Footer/        # Componente de rodapé
+│   │   │   ├── index.jsx
+│   │   │   └── styles.css
+│   │   └── auth/          # Componentes de autenticação
+│   │       ├── LoginModal/
+│   │       │   ├── index.jsx
+│   │       │   └── styles.css
+│   │       └── RegisterModal/
+│   │           ├── index.jsx
+│   │           └── styles.css
+│   ├── pages/             # Páginas da aplicação
+│   │   └── Home/          # Página inicial
+│   │       ├── index.jsx
+│   │       └── styles.css
+│   ├── context/           # Context API
 │   │   └── AuthContext.jsx # Contexto de autenticação
-│   ├── components/         # Componentes reutilizáveis
-│   │   ├── Header.jsx      # Componente de cabeçalho
-│   │   └── Footer.jsx      # Componente de rodapé
-│   ├── pages/              # Páginas principais da aplicação
-│   │   ├── Login.jsx       # Página de login
-│   │   ├── Register.jsx    # Página de registro
-│   │   └── Home.jsx        # Página inicial
+│   ├── services/          # Serviços para APIs
+│   │   └── api.js         # Configuração da API
+│   ├── styles/            # Estilos globais
+│   │   └── global.css     # Reset e configurações globais
+│   ├── App.jsx            # Componente principal
+│   └── main.jsx          # Ponto de entrada do React
 └── ...
+
 -----------------------------------------------------------------------------------------------------------
+PRINCIPAIS MUDANÇAS NA ESTRUTURA:
+1. Componentes agora têm suas próprias pastas com index.jsx e styles.css
+2. Modais de autenticação movidos para components/auth/
+3. Páginas seguem o mesmo padrão de pasta/index/styles
+4. Melhor organização de estilos (cada componente tem seu próprio CSS)
+
+-----------------------------------------------------------------------------------------------------------
+PADRÕES ADOTADOS:
+1. Nomenclatura:
+   - Componentes: PascalCase (LoginModal, Header)
+   - Arquivos: camelCase (styles.css, api.js)
+   - Pastas: camelCase (components, pages)
+
+2. Estrutura de Componentes:
+   - Cada componente em sua própria pasta
+   - index.jsx como ponto de entrada
+   - styles.css para estilos específicos
+
+3. Importações:
+   - Caminho absoluto para imports do src
+   - Imports agrupados por tipo (React, MUI, styles)
+
+4. Estilos:
+   - CSS Modules para escopo local
+   - global.css para estilos compartilhados
+   - Material-UI para componentes base
+
+-----------------------------------------------------------------------------------------------------------
+OBSERVAÇÕES:
+- Esta estrutura facilita a manutenção e escalabilidade
+- Cada componente é autocontido com seus estilos
+- Fácil de encontrar e modificar arquivos relacionados
+- Segue boas práticas da comunidade React
