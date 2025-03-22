@@ -4,7 +4,7 @@ import { FaWallet } from 'react-icons/fa';
 import { MdLightMode, MdDarkMode } from 'react-icons/md';
 import './styles.css';
 
-function Header({ toggleTheme, mode }) {
+function Header({ toggleTheme, mode, onLoginClick }) {
   return (
     <AppBar 
       position="static" 
@@ -61,6 +61,7 @@ function Header({ toggleTheme, mode }) {
               color: mode === 'dark' ? 'primary.main' : 'primary.main',
             }
           }}
+          onClick={onLoginClick}
         >
           Login
         </Button>

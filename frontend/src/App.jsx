@@ -1,12 +1,21 @@
-import React, { useState, useMemo } from 'react';
+import React, { useState, useMemo, useEffect } from 'react';
 import { ThemeProvider, createTheme, CssBaseline, Paper } from '@mui/material';
 import Header from './components/Header';
 import Footer from './components/Footer';
 import Home from './pages/Home';
+import LoginModal from './components/auth/LoginModal';
 import './styles/global.css';
 
 function App() {
-  const [mode, setMode] = useState('dark');
+  const [mode, setMode] = useState(() => {
+    return localStorage.getItem('theme') || 'dark';
+  });
+
+  const [isLoginModalOpen, setLoginModalOpen] = useState(false);
+
+  useEffect(() => {
+    localStorage.setItem('theme', mode);
+  }, [mode]);
 
   const theme = useMemo(
     () =>
@@ -45,7 +54,9 @@ function App() {
                 color: mode === 'dark' ? '#90caf9' : '#1976d2',
                 '&:hover': {
                   borderColor: mode === 'dark' ? '#42a5f5' : '#1565c0',
-                  backgroundColor: mode === 'dark' ? 'rgba(144, 202, 249, 0.08)' : 'rgba(25, 118, 210, 0.08)',
+                  backgroundColor: mode === 'dark'
+                    ? 'rgba(144, 202, 249, 0.08)'
+                    : 'rgba(25, 118, 210, 0.08)',
                 },
               },
             },
@@ -62,15 +73,27 @@ function App() {
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
-      <Paper 
-        sx={{ 
+      <Paper
+        sx={{
           minHeight: '100vh',
           borderRadius: 0,
-          bgcolor: 'background.default'
+          bgcolor: 'background.default',
         }}
       >
-        <Header toggleTheme={toggleTheme} mode={mode} />
-        <Home theme={theme} />
+        <Header
+          toggleTheme={toggleTheme}
+          mode={mode}
+          onLoginClick={() => setLoginModalOpen(true)} 
+        />
+        <Home
+          theme={theme}
+          onLoginClick={() => setLoginModalOpen(true)}
+        />
+        <LoginModal
+          open={isLoginModalOpen}
+          onClose={() => setLoginModalOpen(false)}
+          theme={theme}
+        />
       </Paper>
     </ThemeProvider>
   );
