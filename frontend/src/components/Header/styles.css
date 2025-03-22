@@ -29,3 +29,19 @@
   display: flex;
   gap: 1rem;
 }
+
+.header {
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+}
+
+.logo-container {
+  display: flex;
+  align-items: center;
+  flex-grow: 1;
+  gap: 8px;
+}
+
+.logo-icon {
+  font-size: 24px;
+}

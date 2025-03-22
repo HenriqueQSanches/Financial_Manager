@@ -1,7 +1,8 @@
 import React, { useState, useMemo } from 'react';
-import { Button, ThemeProvider, createTheme, CssBaseline, Paper } from '@mui/material';
-import { FaSignInAlt, FaUserPlus } from 'react-icons/fa';
+import { ThemeProvider, createTheme, CssBaseline, Paper } from '@mui/material';
 import Header from './components/Header';
+import Footer from './components/Footer';
+import Home from './pages/Home';
 import './styles/global.css';
 
 function App() {
@@ -69,42 +70,7 @@ function App() {
         }}
       >
         <Header toggleTheme={toggleTheme} mode={mode} />
-        <div className="hero-section">
-          <h1 style={{ color: theme.palette.primary.main }}>
-            Bem-vindo ao Gerenciador Financeiro
-          </h1>
-          <p style={{ color: theme.palette.text.secondary }}>
-            Uma solução simples e eficiente para gerenciar suas finanças pessoais.
-            Controle seus gastos, acompanhe suas receitas e tome decisões financeiras
-            mais inteligentes.
-          </p>
-          <div className="action-buttons">
-            <Button
-              variant="contained"
-              startIcon={<FaSignInAlt />}
-              onClick={() => alert('Ir para Login')}
-              sx={{ 
-                fontSize: '1rem',
-                padding: '8px 24px',
-                borderRadius: '8px',
-              }}
-            >
-              Login
-            </Button>
-            <Button
-              variant="outlined"
-              startIcon={<FaUserPlus />}
-              onClick={() => alert('Ir para Registro')}
-              sx={{ 
-                fontSize: '1rem',
-                padding: '8px 24px',
-                borderRadius: '8px',
-              }}
-            >
-              Registrar
-            </Button>
-          </div>
-        </div>
+        <Home theme={theme} />
       </Paper>
     </ThemeProvider>
   );

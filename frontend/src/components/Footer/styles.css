@@ -1,0 +1,14 @@
+/* Estilos para o Footer */
+.footer {
+  width: 100%;
+  padding: 1rem 0;
+  background-color: var(--background-paper);
+  margin-top: auto;
+}
+
+.footer-content {
+  max-width: 1200px;
+  margin: 0 auto;
+  text-align: center;
+  color: var(--text-primary);
+}
