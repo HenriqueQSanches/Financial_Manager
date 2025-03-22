@@ -1,8 +1,8 @@
 import React from 'react';
-import { Button, Paper } from '@mui/material';
+import { Button } from '@mui/material';
 import { FaSignInAlt, FaUserPlus } from 'react-icons/fa';
 
-function Home({ theme }) {
+function Home({ theme, onLoginClick }) {
   return (
     <div className="hero-section">
       <h1 style={{ color: theme.palette.primary.main }}>
@@ -17,8 +17,8 @@ function Home({ theme }) {
         <Button
           variant="contained"
           startIcon={<FaSignInAlt />}
-          onClick={() => alert('Ir para Login')}
-          sx={{ 
+          onClick={onLoginClick}
+          sx={{
             fontSize: '1rem',
             padding: '8px 24px',
             borderRadius: '8px',
@@ -30,7 +30,7 @@ function Home({ theme }) {
           variant="outlined"
           startIcon={<FaUserPlus />}
           onClick={() => alert('Ir para Registro')}
-          sx={{ 
+          sx={{
             fontSize: '1rem',
             padding: '8px 24px',
             borderRadius: '8px',
