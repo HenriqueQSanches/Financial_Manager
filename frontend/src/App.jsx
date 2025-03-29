@@ -4,6 +4,7 @@ import Header from './components/Header';
 import Footer from './components/Footer';
 import Home from './pages/Home';
 import LoginModal from './components/auth/LoginModal';
+import RegisterModal from './components/auth/RegisterModal';
 import './styles/global.css';
 
 function App() {
@@ -12,6 +13,7 @@ function App() {
   });
 
   const [isLoginModalOpen, setLoginModalOpen] = useState(false);
+  const [isRegisterModalOpen, setRegisterModalOpen] = useState(false);
 
   useEffect(() => {
     localStorage.setItem('theme', mode);
@@ -88,10 +90,16 @@ function App() {
         <Home
           theme={theme}
           onLoginClick={() => setLoginModalOpen(true)}
+          onRegisterClick={() => setRegisterModalOpen(true)}
         />
         <LoginModal
           open={isLoginModalOpen}
           onClose={() => setLoginModalOpen(false)}
+          theme={theme}
+        />
+        <RegisterModal
+          open={isRegisterModalOpen}
+          onClose={() => setRegisterModalOpen(false)}
           theme={theme}
         />
       </Paper>

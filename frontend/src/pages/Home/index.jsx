@@ -2,7 +2,7 @@ import React from 'react';
 import { Button } from '@mui/material';
 import { FaSignInAlt, FaUserPlus } from 'react-icons/fa';
 
-function Home({ theme, onLoginClick }) {
+function Home({ theme, onLoginClick, onRegisterClick }) {
   return (
     <div className="hero-section">
       <h1 style={{ color: theme.palette.primary.main }}>
@@ -29,7 +29,7 @@ function Home({ theme, onLoginClick }) {
         <Button
           variant="outlined"
           startIcon={<FaUserPlus />}
-          onClick={() => alert('Ir para Registro')}
+          onClick={onRegisterClick}
           sx={{
             fontSize: '1rem',
             padding: '8px 24px',
