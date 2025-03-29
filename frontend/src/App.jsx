@@ -5,6 +5,7 @@ import Footer from './components/Footer';
 import Home from './pages/Home';
 import LoginModal from './components/auth/LoginModal';
 import RegisterModal from './components/auth/RegisterModal';
+import Notification from './components/common/Notification';
 import './styles/global.css';
 
 function App() {
@@ -14,6 +15,11 @@ function App() {
 
   const [isLoginModalOpen, setLoginModalOpen] = useState(false);
   const [isRegisterModalOpen, setRegisterModalOpen] = useState(false);
+  const [notification, setNotification] = useState({
+    open: false,
+    message: '',
+    severity: 'success'
+  });
 
   useEffect(() => {
     localStorage.setItem('theme', mode);
@@ -63,6 +69,40 @@ function App() {
               },
             },
           },
+          MuiAlert: {
+            styleOverrides: {
+              root: {
+                borderRadius: '8px',
+                boxShadow: '0 4px 12px rgba(0,0,0,0.15)',
+              },
+              standardSuccess: {
+                backgroundColor: mode === 'dark' ? '#2e7d32' : '#e8f5e9',
+                color: mode === 'dark' ? '#fff' : '#1b5e20'
+              },
+              standardError: {
+                backgroundColor: mode === 'dark' ? '#d32f2f' : '#ffebee',
+                color: mode === 'dark' ? '#fff' : '#c62828'
+              },
+              filledSuccess: {
+                backgroundColor: mode === 'dark' ? '#2e7d32' : '#43a047',
+              },
+              filledError: {
+                backgroundColor: mode === 'dark' ? '#d32f2f' : '#e53935',
+              },
+            }
+          },
+          MuiSnackbar: {
+            styleOverrides: {
+              root: {
+                '& .MuiAlert-filledSuccess': {
+                  boxShadow: '0 4px 12px rgba(76, 175, 80, 0.3)',
+                },
+                '& .MuiAlert-filledError': {
+                  boxShadow: '0 4px 12px rgba(244, 67, 54, 0.3)',
+                },
+              }
+            }
+          }
         },
       }),
     [mode]
@@ -70,6 +110,18 @@ function App() {
 
   const toggleTheme = () => {
     setMode((prevMode) => (prevMode === 'light' ? 'dark' : 'light'));
+  };
+
+  const showNotification = (message, severity = 'success') => {
+    setNotification({
+      open: true,
+      message,
+      severity
+    });
+  };
+
+  const handleCloseNotification = () => {
+    setNotification(prev => ({ ...prev, open: false }));
   };
 
   return (
@@ -85,7 +137,8 @@ function App() {
         <Header
           toggleTheme={toggleTheme}
           mode={mode}
-          onLoginClick={() => setLoginModalOpen(true)} 
+          onLoginClick={() => setLoginModalOpen(true)}
+          onRegisterClick={() => setRegisterModalOpen(true)}
         />
         <Home
           theme={theme}
@@ -101,6 +154,16 @@ function App() {
           open={isRegisterModalOpen}
           onClose={() => setRegisterModalOpen(false)}
           theme={theme}
+          onSuccess={(message) => {
+            setRegisterModalOpen(false);
+            showNotification(message);
+          }}
+        />
+        <Notification
+          open={notification.open}
+          message={notification.message}
+          severity={notification.severity}
+          onClose={handleCloseNotification}
         />
       </Paper>
     </ThemeProvider>

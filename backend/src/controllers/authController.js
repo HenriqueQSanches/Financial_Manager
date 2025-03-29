@@ -35,23 +35,42 @@ class AuthController {
         const { name, email, password } = req.body;
         
         try {
-            const existingUser = await User.findByEmail(email);
-            if (existingUser) {
-                return res.status(400).json({ error: 'Email already registered' });
+            // Validações básicas
+            if (!name || !email || !password) {
+                return res.status(400).json({ error: 'Todos os campos são obrigatórios' });
             }
 
-            const hashedPassword = await bcrypt.hash(password, 10);
-            const user = await User.create({ name, email, password: hashedPassword });
+            // Validar formato do email
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!emailRegex.test(email)) {
+                return res.status(400).json({ error: 'Email inválido' });
+            }
 
+            // Verificar se usuário já existe
+            const existingUser = await User.findByEmail(email);
+            if (existingUser) {
+                return res.status(400).json({ error: 'Email já cadastrado' });
+            }
+
+            // Criar novo usuário
+            const user = await User.create({ name, email, password });
+
+            // Gerar token
             const token = jwt.sign(
                 { userId: user.id, email: user.email },
                 process.env.JWT_SECRET,
                 { expiresIn: '24h' }
             );
 
-            return res.status(201).json({ token, user: { id: user.id, name, email } });
+            // Retornar resposta sem a senha
+            return res.status(201).json({
+                token,
+                user: user.toJSON()
+            });
+
         } catch (error) {
-            return res.status(500).json({ error: 'Internal server error' });
+            console.error('Erro no registro:', error);
+            return res.status(500).json({ error: 'Erro interno do servidor' });
         }
     }
 }
