@@ -1,0 +1,88 @@
+.modal-overlay {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  backdrop-filter: blur(4px);
+  background-color: rgba(0, 0, 0, 0.5);
+  padding: 16px;
+}
+
+.login-modal {
+  position: relative;
+  width: 100%;
+  max-width: 400px;
+  background-color: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+.login-modal::-webkit-scrollbar {
+  width: 8px;
+}
+
+.login-modal::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.login-modal::-webkit-scrollbar-thumb {
+  background-color: rgba(0, 0, 0, 0.2);
+  border-radius: 4px;
+}
+
+.scroll-indicator {
+  position: absolute;
+  bottom: 16px;
+  left: 50%;
+  width: 24px;
+  height: 24px;
+  border-style: solid;
+  border-width: 0 4px 4px 0;
+  transform: translateX(-50%) rotate(45deg);
+  animation: arrowBounceAndPulse 2s ease-in-out infinite;
+  z-index: 1500;
+}
+
+@keyframes arrowBounceAndPulse {
+  0% {
+    transform: translateX(-50%) rotate(45deg) translateY(0);
+    opacity: 1;
+  }
+  50% {
+    transform: translateX(-50%) rotate(45deg) translateY(12px);
+    opacity: 0.6;
+  }
+  100% {
+    transform: translateX(-50%) rotate(45deg) translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes arrowBounce {
+  0%, 100% {
+    transform: translateX(-50%) rotate(45deg) translateY(0);
+  }
+  50% {
+    transform: translateX(-50%) rotate(45deg) translateY(10px);
+  }
+}
+
+@media (max-height: 600px) {
+  .login-modal {
+    gap: 8px;
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
