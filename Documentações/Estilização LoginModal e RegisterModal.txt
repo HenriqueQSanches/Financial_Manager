@@ -1,0 +1,62 @@
+ESTILIZAÇÃO DOS MODAIS DE LOGIN E REGISTRO
+-> Instalei ícones do Material UI
+ -> npm install @mui/icons-material
+  -> Adicionei o GoogleIcon pra fazer o login social
+
+-----------------------------------------------------------------------------------------------------------
+ESTRUTURA DOS MODAIS:
+LoginModal/
+├── Título de boas-vindas
+├── Campo de email
+├── Campo de senha
+├── Checkbox "Lembre-se de mim"
+├── Botão de login principal
+├── Botão de login com Google
+└── Botão de cancelar
+
+RegisterModal/
+├── Título de registro
+├── Campo de nome
+├── Campo de email
+├── Campo de senha
+├── Campo de confirmar senha
+├── Botão de registro principal
+├── Botão de registro com Google
+└── Botão de cancelar
+
+-----------------------------------------------------------------------------------------------------------
+CARACTERÍSTICAS PRINCIPAIS:
+1. Fundo com blur e overlay escuro (backdrop-filter: blur(4px))
+2. Animação suave de entrada (fadeIn de 0.3s)
+3. Box-shadow pros modais saltarem da tela
+4. Responsividade automática
+5. Indicador de scroll no RegisterModal
+6. Cores seguindo o tema atual (claro/escuro)
+
+-----------------------------------------------------------------------------------------------------------
+DETALHES DE ESTILIZAÇÃO:
+Modal Base:
+├── Max-width: 400px
+├── Border-radius: 12px
+├── Padding interno adaptativo
+└── Gap entre elementos: 16px (12px no RegisterModal)
+
+Scrollbar Custom:
+├── Width: 8px
+├── Track transparente
+├── Thumb com alpha de 0.2
+└── Border-radius: 4px
+
+Animações:
+├── FadeIn na entrada
+└── Bounce pro indicador de scroll
+
+-----------------------------------------------------------------------------------------------------------
+PRÓXIMOS PASSOS:
+1. Adicionar validação nos campos
+2. Implementar login social com Google
+3. Adicionar loading states nos botões
+4. Fazer a integração com o backend
+
+(Manter o mesmo padrão de cores do tema em tudo!)
+-----------------------------------------------------------------------------------------------------------
