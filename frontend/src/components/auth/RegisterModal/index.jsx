@@ -1,9 +1,18 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { Modal, Box, Typography, Button, TextField } from '@mui/material';
+import { Modal, Box, Typography, Button, TextField, Alert } from '@mui/material';
 import GoogleIcon from '@mui/icons-material/Google';
+import { authService } from '../../../services/auth';
 import './styles.css';
 
-function RegisterModal({ open, onClose, theme }) {
+function RegisterModal({ open, onClose, theme, onSuccess }) {
+  const [formData, setFormData] = useState({
+    name: '',
+    email: '',
+    password: '',
+    confirmPassword: ''
+  });
+  const [error, setError] = useState('');
+  const [loading, setLoading] = useState(false);
   const [showScrollIndicator, setShowScrollIndicator] = useState(true);
   const modalRef = useRef(null);
 
@@ -23,10 +32,53 @@ function RegisterModal({ open, onClose, theme }) {
     }
   }, [open]);
 
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData(prev => ({
+      ...prev,
+      [name]: value
+    }));
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setError('');
+
+    // Validações básicas
+    if (!formData.name || !formData.email || !formData.password) {
+      setError('Todos os campos são obrigatórios');
+      return;
+    }
+
+    if (formData.password !== formData.confirmPassword) {
+      setError('As senhas não coincidem');
+      return;
+    }
+
+    try {
+      setLoading(true);
+      const { confirmPassword, ...registerData } = formData;
+      await authService.register(registerData);
+      onSuccess('Conta criada com sucesso! Você já pode fazer login.');
+      setFormData({
+        name: '',
+        email: '',
+        password: '',
+        confirmPassword: ''
+      });
+    } catch (err) {
+      setError(err.message || 'Erro ao registrar usuário');
+    } finally {
+      setLoading(false);
+    }
+  };
+
   return (
     <Modal open={open} onClose={onClose} className="modal-overlay">
       <Box
         ref={modalRef}
+        component="form"
+        onSubmit={handleSubmit}
         className="login-modal"
         onScroll={handleScroll}
         sx={{
@@ -74,9 +126,16 @@ function RegisterModal({ open, onClose, theme }) {
         <Typography variant="body2" color="textSecondary" gutterBottom>
           Preencha os dados abaixo para começar a gerenciar suas finanças.
         </Typography>
+        {error && (
+          <Alert severity="error" sx={{ mb: 2 }}>
+            {error}
+          </Alert>
+        )}
         <TextField
+          name="name"
           label="Nome"
-          type="text"
+          value={formData.name}
+          onChange={handleChange}
           fullWidth
           margin="normal"
           variant="outlined"
@@ -85,8 +144,10 @@ function RegisterModal({ open, onClose, theme }) {
           }}
         />
         <TextField
+          name="email"
           label="Email"
-          type="email"
+          value={formData.email}
+          onChange={handleChange}
           fullWidth
           margin="normal"
           variant="outlined"
@@ -95,8 +156,11 @@ function RegisterModal({ open, onClose, theme }) {
           }}
         />
         <TextField
+          name="password"
           label="Senha"
           type="password"
+          value={formData.password}
+          onChange={handleChange}
           fullWidth
           margin="normal"
           variant="outlined"
@@ -105,8 +169,11 @@ function RegisterModal({ open, onClose, theme }) {
           }}
         />
         <TextField
+          name="confirmPassword"
           label="Confirmar Senha"
           type="password"
+          value={formData.confirmPassword}
+          onChange={handleChange}
           fullWidth
           margin="normal"
           variant="outlined"
@@ -115,12 +182,14 @@ function RegisterModal({ open, onClose, theme }) {
           }}
         />
         <Button
+          type="submit"
           variant="contained"
           color="primary"
+          disabled={loading}
           fullWidth
           sx={{ marginTop: '16px', padding: '10px' }}
         >
-          Registrar
+          {loading ? 'Registrando...' : 'Registrar'}
         </Button>
         <Button
           variant="outlined"

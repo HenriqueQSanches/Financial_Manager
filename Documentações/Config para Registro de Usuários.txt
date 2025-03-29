@@ -1,0 +1,77 @@
+IMPLEMENTAÇÃO DO SISTEMA DE REGISTRO DE USUÁRIOS
+-> Primeiro montei toda a estrutura básica
+ -> Organizei tudo certinho pra não virar bagunça
+  -> Cada componente com sua responsabilidade
+
+-----------------------------------------------------------------------------------------------------------
+PASSO A PASSO DO QUE FIZ:
+
+1. NO BACKEND:
+-> Criei o UserRepository pra lidar com o banco
+ -> Métodos pra criar e buscar usuário
+ -> Tudo usando Promise pra ficar async bonito
+ -> Separei as queries SQL do resto (fica mais organizado)
+
+-> Montei o Model do User
+ -> Regras de negócio todas aqui
+ -> Hash de senha com bcrypt
+ -> Método toJSON pra não vazar a senha
+
+-> Fiz o AuthController maneiro
+ -> Validações dos campos
+ -> Tratamento de erro pra cada caso
+ -> Geração do token JWT
+
+2. NO FRONTEND:
+-> Criei o serviço de autenticação
+ -> Método register() pra mandar pro backend
+ -> Salvando token no localStorage
+ -> Tratamento de erro organizado
+
+-> Modal de registro top
+ -> Formulário com validação
+ -> Loading state enquanto registra
+ -> Mensagem de erro quando dá ruim
+
+-> Sistema de notificação
+ -> Alert do MUI todo estilizado
+ -> Animação suave de entrada
+ -> Cores diferentes pra cada tipo de mensagem
+ -> Se adapta ao tema dark/light
+
+-----------------------------------------------------------------------------------------------------------
+FLUXO DE FUNCIONAMENTO:
+1. Usuário preenche o form e clica em registrar
+2. Frontend valida os dados básicos
+3. Manda pro backend via API
+4. Backend faz mais validações
+5. Cria o usuário no SQLite
+6. Devolve o token JWT
+7. Frontend mostra notificação de sucesso
+8. Modal fecha e usuário já pode fazer login
+
+-----------------------------------------------------------------------------------------------------------
+DETALHES IMPORTANTES QUE COLOQUEI:
+-> Validações em camadas
+ -> Frontend valida primeiro (experiência melhor)
+ -> Backend valida tudo de novo (segurança)
+
+-> Tratamento de erro em todo lugar
+ -> Mensagens claras pro usuário
+ -> Console.log dos erros no backend
+ -> Tudo try/catch certinho
+
+-> UX pensada
+ -> Loading state nos botões
+ -> Feedback visual instantâneo
+ -> Notificações estilizadas
+ -> Transições suaves
+
+-----------------------------------------------------------------------------------------------------------
+PRÓXIMOS PASSOS:
+1. Implementar o login
+2. Criar a dashboard do usuário
+3. Adicionar página de perfil
+4. Implementar recuperação de senha
+
+-----------------------------------------------------------------------------------------------------------

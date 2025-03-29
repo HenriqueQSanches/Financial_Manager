@@ -4,7 +4,7 @@ import { FaWallet } from 'react-icons/fa';
 import { MdLightMode, MdDarkMode } from 'react-icons/md';
 import './styles.css';
 
-function Header({ toggleTheme, mode, onLoginClick }) {
+function Header({ toggleTheme, mode, onLoginClick, onRegisterClick }) {
   return (
     <AppBar 
       position="static" 
@@ -74,6 +74,7 @@ function Header({ toggleTheme, mode, onLoginClick }) {
               color: mode === 'dark' ? 'primary.main' : 'primary.main',
             }
           }}
+          onClick={onRegisterClick}
         >
           Registrar
         </Button>
