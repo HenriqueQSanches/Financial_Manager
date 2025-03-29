@@ -1,0 +1,116 @@
+CONFIGURAÇÃO INICIAL DO BACKEND
+-> Criei toda a estrutura de pastas seguindo boas práticas
+ -> Organizei tudo separadinho pra ficar mais fácil de dar manutenção depois
+  -> Cada arquivo com sua responsabilidade específica
+
+-----------------------------------------------------------------------------------------------------------
+ESTRUTURA QUE MONTEI:
+backend/
+├── src/                    # Onde fica todo código do backend
+│   ├── config/            # Configurações (tipo banco de dados)
+│   │   └── database.js    # Configuração do SQLite
+│   ├── controllers/       # Controladores da aplicação
+│   │   └── authController.js  # Lógica de autenticação
+│   ├── middleware/        # Middlewares da aplicação
+│   │   ├── cors.js       # Configuração do CORS
+│   │   ├── auth.js       # Middleware de autenticação
+│   │   └── index.js      # Arquivo que junta os middlewares
+│   ├── models/           # Modelos do banco de dados
+│   │   └── User.js       # Modelo de usuário
+│   ├── routes/           # Rotas da API
+│   │   └── index.js      # Rotas principais
+│   ├── app.js           # Config do Express
+│   └── server.js        # Arquivo que inicia o servidor
+└── .env                 # Variáveis de ambiente
+
+-----------------------------------------------------------------------------------------------------------
+O QUE JÁ FIZEMOS:
+1. Configuração do Servidor
+   -> Express configurado certinho
+   -> CORS permitindo acesso do frontend
+   -> Tratamento de erros global
+
+2. Banco de Dados
+   -> SQLite configurado (escolhi ele porque é mais simples pro desenvolvimento)
+   -> Tabela de usuários criada automaticamente
+
+3. Autenticação
+   -> Login e registro funcionando
+   -> Senhas criptografadas com bcrypt
+   -> JWT pra manter o usuário logado
+
+4. Middlewares
+   -> CORS configurado pra aceitar requisições do frontend
+   -> Autenticação via JWT implementada
+   -> Tratamento de erros centralizado
+
+-----------------------------------------------------------------------------------------------------------
+DEPENDÊNCIAS QUE INSTALEI:
+-> npm install express sqlite3 dotenv cors bcryptjs jsonwebtoken
+ -> express: pra criar o servidor
+ -> sqlite3: banco de dados
+ -> dotenv: variáveis de ambiente
+ -> cors: permitir requisições do frontend
+ -> bcryptjs: criptografar senhas
+ -> jsonwebtoken: gerar tokens de autenticação
+
+-----------------------------------------------------------------------------------------------------------
+PRÓXIMOS PASSOS:
+1. Criar as rotas de transações financeiras
+2. Implementar validação dos dados
+3. Adicionar testes automatizados
+4. Melhorar o tratamento de erros
+
+-----------------------------------------------------------------------------------------------------------
+
+IMPLEMENTAÇÃO DO PADRÃO MVC:
+-> Model (M): Onde fica a estrutura dos dados e regras de negócio
+ -> /models/User.js: Define a estrutura do usuário e métodos como criar conta e validar senha
+ -> /repositories/UserRepository.js: Cuida das queries SQL (Tipo um helper do Model)
+
+-> View (V): Interface que o usuário vê e interage
+ -> Todo nosso frontend em React
+ -> Componentes na pasta /frontend/src/components
+ -> Páginas na pasta /frontend/src/pages
+
+-> Controller (C): Controla o fluxo das requisições
+ -> /controllers/authController.js: Lida com login/registro
+ -> Recebe pedidos do frontend
+ -> Usa o Model pra processar
+ -> Devolve resposta pro frontend
+
+-----------------------------------------------------------------------------------------------------------
+ATUALIZAÇÃO DA ESTRUTURA:
+-> Agora temos uma pasta repositories/
+ -> Separei as queries SQL do Model (fica mais organizado)
+ -> UserRepository.js cuida só do banco
+ -> User.js cuida só das regras de negócio
+
+-> Estrutura nova do Model (User.js):
+ -> Métodos de negócio (tipo criar usuário, buscar por email)
+ -> Hash de senha com bcrypt
+ -> Validações importantes
+ -> Não tem mais SQL aqui!
+
+-> Estrutura do Repository (UserRepository.js):
+ -> Queries SQL organizadas
+ -> Criação da tabela users
+ -> Métodos pra salvar e buscar do banco
+ -> Tudo usando Promise pra ficar async
+
+-----------------------------------------------------------------------------------------------------------
+POR QUE SEPAREI ASSIM?
+-> Fica mais fácil de manter
+ -> Cada arquivo tem sua responsabilidade
+ -> Se precisar trocar o banco, só mexo no Repository
+ -> Se mudar regra de negócio, só mexo no Model
+
+-> Mais fácil de testar
+ -> Dá pra testar Model sem mexer no banco
+ -> Testes mais organizados e rápidos
+
+-> Código mais limpo
+ -> Não mistura SQL com regras de negócio
+ -> Mais fácil de entender o que cada parte faz
+
+-----------------------------------------------------------------------------------------------------------
