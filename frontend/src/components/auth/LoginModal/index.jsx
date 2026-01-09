@@ -70,21 +70,6 @@ function LoginModal({ open, onClose, theme }) {
           Entrar
         </Button>
         <Button
-          variant="outlined"
-          fullWidth
-          sx={{ 
-            marginTop: '8px', 
-            padding: '10px',
-            display: 'flex',
-            gap: '8px',
-            alignItems: 'center',
-            justifyContent: 'center'
-          }}
-        >
-          <GoogleIcon />
-          Entrar com Google
-        </Button>
-        <Button
           variant="text"
           color="secondary"
           fullWidth

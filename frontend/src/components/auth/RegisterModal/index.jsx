@@ -192,21 +192,6 @@ function RegisterModal({ open, onClose, theme, onSuccess }) {
           {loading ? 'Registrando...' : 'Registrar'}
         </Button>
         <Button
-          variant="outlined"
-          fullWidth
-          sx={{ 
-            marginTop: '8px', 
-            padding: '10px',
-            display: 'flex',
-            gap: '8px',
-            alignItems: 'center',
-            justifyContent: 'center'
-          }}
-        >
-          <GoogleIcon />
-          Registrar com Google
-        </Button>
-        <Button
           variant="text"
           color="secondary"
           fullWidth
@@ -215,18 +200,6 @@ function RegisterModal({ open, onClose, theme, onSuccess }) {
         >
           Cancelar
         </Button>
-        {showScrollIndicator && (
-          <div 
-            className="scroll-indicator"
-            style={{ 
-              borderColor: theme.palette.mode === 'dark' 
-                ? theme.palette.common.white 
-                : theme.palette.common.black,
-              opacity: 0.8
-            }}
-            aria-hidden="true"
-          />
-        )}
       </Box>
     </Modal>
   );
