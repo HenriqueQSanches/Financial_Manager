@@ -10,7 +10,8 @@ export const authService = {
             }
             return response.data;
         } catch (error) {
-            throw error.response?.data?.error || 'Erro ao registrar usuário';
+            const message = error.response?.data?.error || 'Erro ao registrar usuário';
+            throw new Error(message);
         }
     },
 
