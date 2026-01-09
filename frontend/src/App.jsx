@@ -7,6 +7,7 @@ import LoginModal from './components/auth/LoginModal';
 import RegisterModal from './components/auth/RegisterModal';
 import Notification from './components/common/Notification';
 import Dashboard from './pages/Dashboard';
+import Transactions from './pages/Transactions';
 import './styles/global.css';
 
 function ProtectedRoute({ children }) {
@@ -176,6 +177,14 @@ function App() {
                 onLoginClick={() => setLoginModalOpen(true)}
                 onRegisterClick={() => setRegisterModalOpen(true)}
               />
+            }
+          />
+        <Route
+            path="/transactions"
+            element={
+              <ProtectedRoute>
+                <Transactions />
+              </ProtectedRoute>
             }
           />
         <Route
