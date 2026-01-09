@@ -2,6 +2,7 @@ import React from 'react';
 import { AppBar, Toolbar, Typography, Button, Box, IconButton } from '@mui/material';
 import { FaWallet } from 'react-icons/fa';
 import { MdLightMode, MdDarkMode } from 'react-icons/md';
+import { Link } from 'react-router-dom';
 import './styles.css';
 
 function Header({ toggleTheme, mode, onLoginClick, onRegisterClick, isAuthenticated, onLogout }) {
@@ -53,6 +54,15 @@ function Header({ toggleTheme, mode, onLoginClick, onRegisterClick, isAuthentica
         </IconButton>
 
         {isAuthenticated ? (
+          <>
+          <Button 
+            component={Link}
+            to="/transactions"
+            color="inherit"
+            sx={{ marginLeft: 2, color: mode === 'dark' ? 'inherit' : 'primary.dark' }}
+          >
+            Transações
+          </Button>
           <Button 
             color="inherit"
             sx={{ marginLeft: 2, color: mode === 'dark' ? 'inherit' : 'primary.dark' }}
@@ -60,6 +70,7 @@ function Header({ toggleTheme, mode, onLoginClick, onRegisterClick, isAuthentica
           >
             Sair
           </Button>
+          </>
         ) : (
           <>
             <Button 
