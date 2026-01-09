@@ -4,7 +4,7 @@ import { FaWallet } from 'react-icons/fa';
 import { MdLightMode, MdDarkMode } from 'react-icons/md';
 import './styles.css';
 
-function Header({ toggleTheme, mode, onLoginClick, onRegisterClick }) {
+function Header({ toggleTheme, mode, onLoginClick, onRegisterClick, isAuthenticated, onLogout }) {
   return (
     <AppBar 
       position="static" 
@@ -52,32 +52,32 @@ function Header({ toggleTheme, mode, onLoginClick, onRegisterClick }) {
           {mode === 'dark' ? <MdLightMode /> : <MdDarkMode />}
         </IconButton>
 
-        <Button 
-          color="inherit" 
-          sx={{ 
-            marginLeft: 2,
-            color: mode === 'dark' ? 'inherit' : 'primary.dark',
-            '&:hover': {
-              color: mode === 'dark' ? 'primary.main' : 'primary.main',
-            }
-          }}
-          onClick={onLoginClick}
-        >
-          Login
-        </Button>
-        <Button 
-          color="inherit"
-          sx={{ 
-            marginLeft: 1,
-            color: mode === 'dark' ? 'inherit' : 'primary.dark',
-            '&:hover': {
-              color: mode === 'dark' ? 'primary.main' : 'primary.main',
-            }
-          }}
-          onClick={onRegisterClick}
-        >
-          Registrar
-        </Button>
+        {isAuthenticated ? (
+          <Button 
+            color="inherit"
+            sx={{ marginLeft: 2, color: mode === 'dark' ? 'inherit' : 'primary.dark' }}
+            onClick={onLogout}
+          >
+            Sair
+          </Button>
+        ) : (
+          <>
+            <Button 
+              color="inherit" 
+              sx={{ marginLeft: 2, color: mode === 'dark' ? 'inherit' : 'primary.dark' }}
+              onClick={onLoginClick}
+            >
+              Login
+            </Button>
+            <Button 
+              color="inherit"
+              sx={{ marginLeft: 1, color: mode === 'dark' ? 'inherit' : 'primary.dark' }}
+              onClick={onRegisterClick}
+            >
+              Registrar
+            </Button>
+          </>
+        )}
       </Toolbar>
     </AppBar>
   );

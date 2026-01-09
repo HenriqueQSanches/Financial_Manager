@@ -1,12 +1,18 @@
 import React, { useState, useMemo, useEffect } from 'react';
 import { ThemeProvider, createTheme, CssBaseline, Paper } from '@mui/material';
+import { Routes, Route, Navigate, useNavigate } from 'react-router-dom';
 import Header from './components/Header';
-import Footer from './components/Footer';
 import Home from './pages/Home';
 import LoginModal from './components/auth/LoginModal';
 import RegisterModal from './components/auth/RegisterModal';
 import Notification from './components/common/Notification';
+import Dashboard from './pages/Dashboard';
 import './styles/global.css';
+
+function ProtectedRoute({ children }) {
+  const token = localStorage.getItem('token');
+  return token ? children : <Navigate to="/" replace />;
+}
 
 function App() {
   const [mode, setMode] = useState(() => {
@@ -15,6 +21,8 @@ function App() {
 
   const [isLoginModalOpen, setLoginModalOpen] = useState(false);
   const [isRegisterModalOpen, setRegisterModalOpen] = useState(false);
+  const [isAuthenticated, setIsAuthenticated] = useState(() => !!localStorage.getItem('token'));
+
   const [notification, setNotification] = useState({
     open: false,
     message: '',
@@ -124,6 +132,23 @@ function App() {
     setNotification(prev => ({ ...prev, open: false }));
   };
 
+  const navigate = useNavigate();
+
+  const handleLoginSuccess = (msg = 'Login efetuado com sucesso!') => {
+    setLoginModalOpen(false);
+    setIsAuthenticated(true);
+    showNotification(msg);
+    navigate('/dashboard', { replace: true });
+  };
+
+  const handleLogout = () => {
+    localStorage.removeItem('token');
+    localStorage.removeItem('user');
+    setIsAuthenticated(false);
+    navigate('/', { replace: true });
+    showNotification('Logout efetuado com sucesso!');
+  };
+
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
@@ -139,16 +164,35 @@ function App() {
           mode={mode}
           onLoginClick={() => setLoginModalOpen(true)}
           onRegisterClick={() => setRegisterModalOpen(true)}
+          isAuthenticated={isAuthenticated}
+          onLogout={handleLogout}
         />
-        <Home
-          theme={theme}
-          onLoginClick={() => setLoginModalOpen(true)}
-          onRegisterClick={() => setRegisterModalOpen(true)}
-        />
+        <Routes>
+          <Route
+            path="/"
+            element={
+              <Home
+                theme={theme}
+                onLoginClick={() => setLoginModalOpen(true)}
+                onRegisterClick={() => setRegisterModalOpen(true)}
+              />
+            }
+          />
+        <Route
+            path="/dashboard"
+            element={
+              <ProtectedRoute>
+                <Dashboard />
+              </ProtectedRoute>
+            }
+          />
+          <Route path="*" element={<Navigate to="/" replace />} />
+        </Routes>
         <LoginModal
           open={isLoginModalOpen}
           onClose={() => setLoginModalOpen(false)}
           theme={theme}
+          onSuccess={handleLoginSuccess}
         />
         <RegisterModal
           open={isRegisterModalOpen}
