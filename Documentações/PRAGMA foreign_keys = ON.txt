@@ -1,0 +1,7 @@
+PRAGMA foreign_keys = ON ativa a validação de chaves estrangeiras:
+- Bloqueia inserts/updates com referências inexistentes.
+- Impede deletar registros “pai” referenciados, a menos que haja regra (CASCADE/SET NULL).
+- Faz valer ações ON DELETE/UPDATE CASCADE, SET NULL, etc.
+- É por conexão: precisa ser executado após conectar e vale até fechar a conexão.
+
+Para checar: PRAGMA foreign_keys; → retorna 1 (ligado) ou 0 (desligado).

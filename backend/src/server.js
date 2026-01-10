@@ -2,6 +2,7 @@
 require('dotenv').config();
 const app = require('./app');
 const db = require('./config/database');
+require('./repositories/TransactionRepository');
 
 const PORT = process.env.PORT || 3000;
 
