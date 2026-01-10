@@ -10,6 +10,11 @@ const db = new sqlite3.Database(dbPath, (err) => {
         return;
     }
     console.log('✅ Conectado ao banco SQLite');
+    
+    // Habilitando chaves estrangeiras \\ 
+    db.serialize(() => {
+        db.run('PRAGMA foreign_keys = ON');
+    });
 });
 
 module.exports = db;
