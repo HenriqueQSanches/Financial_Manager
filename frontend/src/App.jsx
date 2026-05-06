@@ -3,16 +3,14 @@ import { ThemeProvider, createTheme, CssBaseline, Paper } from '@mui/material';
 import { Routes, Route, Navigate, useNavigate } from 'react-router-dom';
 import Header from './components/Header';
 import Home from './pages/Home';
-import LoginModal from './components/auth/LoginModal';
-import RegisterModal from './components/auth/RegisterModal';
 import Notification from './components/common/Notification';
 import Dashboard from './pages/Dashboard';
 import Transactions from './pages/Transactions';
 import './styles/global.css';
 
 function ProtectedRoute({ children }) {
-  const token = localStorage.getItem('token');
-  return token ? children : <Navigate to="/" replace />;
+  const user = localStorage.getItem('user');
+  return user ? children : <Navigate to="/" replace />;
 }
 
 function App() {
@@ -20,9 +18,11 @@ function App() {
     return localStorage.getItem('theme') || 'dark';
   });
 
-  const [isLoginModalOpen, setLoginModalOpen] = useState(false);
-  const [isRegisterModalOpen, setRegisterModalOpen] = useState(false);
-  const [isAuthenticated, setIsAuthenticated] = useState(() => !!localStorage.getItem('token'));
+  const [isAuthenticated, setIsAuthenticated] = useState(() => !!localStorage.getItem('user'));
+  const [currentUser, setCurrentUser] = useState(() => {
+    const userStr = localStorage.getItem('user');
+    return userStr ? JSON.parse(userStr) : null;
+  });
 
   const [notification, setNotification] = useState({
     open: false,
@@ -135,19 +135,20 @@ function App() {
 
   const navigate = useNavigate();
 
-  const handleLoginSuccess = (msg = 'Login efetuado com sucesso!') => {
-    setLoginModalOpen(false);
+  const handleProfileSelect = (user) => {
+    localStorage.setItem('user', JSON.stringify(user));
+    setCurrentUser(user);
     setIsAuthenticated(true);
-    showNotification(msg);
+    showNotification(`Bem-vindo(a), ${user.name}!`);
     navigate('/dashboard', { replace: true });
   };
 
   const handleLogout = () => {
-    localStorage.removeItem('token');
     localStorage.removeItem('user');
+    setCurrentUser(null);
     setIsAuthenticated(false);
     navigate('/', { replace: true });
-    showNotification('Logout efetuado com sucesso!');
+    showNotification('Sessão encerrada.');
   };
 
   return (
@@ -163,10 +164,9 @@ function App() {
         <Header
           toggleTheme={toggleTheme}
           mode={mode}
-          onLoginClick={() => setLoginModalOpen(true)}
-          onRegisterClick={() => setRegisterModalOpen(true)}
           isAuthenticated={isAuthenticated}
           onLogout={handleLogout}
+          currentUser={currentUser}
         />
         <Routes>
           <Route
@@ -174,8 +174,8 @@ function App() {
             element={
               <Home
                 theme={theme}
-                onLoginClick={() => setLoginModalOpen(true)}
-                onRegisterClick={() => setRegisterModalOpen(true)}
+                onProfileSelect={handleProfileSelect}
+                showNotification={showNotification}
               />
             }
           />
@@ -183,7 +183,7 @@ function App() {
             path="/transactions"
             element={
               <ProtectedRoute>
-                <Transactions />
+                <Transactions showNotification={showNotification} />
               </ProtectedRoute>
             }
           />
@@ -191,27 +191,12 @@ function App() {
             path="/dashboard"
             element={
               <ProtectedRoute>
-                <Dashboard />
+                <Dashboard showNotification={showNotification} />
               </ProtectedRoute>
             }
           />
           <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>
-        <LoginModal
-          open={isLoginModalOpen}
-          onClose={() => setLoginModalOpen(false)}
-          theme={theme}
-          onSuccess={handleLoginSuccess}
-        />
-        <RegisterModal
-          open={isRegisterModalOpen}
-          onClose={() => setRegisterModalOpen(false)}
-          theme={theme}
-          onSuccess={(message) => {
-            setRegisterModalOpen(false);
-            showNotification(message);
-          }}
-        />
         <Notification
           open={notification.open}
           message={notification.message}

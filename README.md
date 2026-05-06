@@ -1,14 +1,15 @@
-# Gerenciador Financeiro Simples
+![alt text](image.png)# Gerenciador Financeiro Simples
 
-Bem-vindo ao **Gerenciador Financeiro Simples**! Este é um aplicativo básico de login e gerenciamento financeiro, criado para fins de aprendizado e uso pessoal. Ele permite que você registre suas credenciais, faça login e gerencie suas finanças de forma simples.
+Bem-vindo ao **Gerenciador Financeiro Simples**! Este é um aplicativo básico de gerenciamento financeiro, criado para fins de aprendizado e uso pessoal. Ele permite que você gerencie suas finanças de forma simples, organizadas por perfis individuais.
 
 ---
 
 ## 🚀 Funcionalidades
 
-- **Autenticação de Usuário**:
-  - Registro de novos usuários.
-  - Login com validação de credenciais.
+- **Gerenciamento de Perfis**:
+  - Seleção simples de perfil na tela inicial (sem necessidade de senhas complexas).
+  - Criação rápida de novos perfis com apenas o nome.
+  - Dados isolados para cada perfil.
   
 - **Gerenciamento Financeiro**:
   - Adicionar, editar e excluir transações financeiras.
@@ -83,7 +84,7 @@ O código está completamente documentado (pasta Documentações) para facilitar
 Para entender melhor a estrutura do projeto:
 1. Comece examinando o `server.js` no backend
 2. Veja como as rotas são organizadas em `routes/`
-3. No frontend, o `App.jsx` e `AuthContext.jsx` fornecem uma visão geral da aplicação
+3. No frontend, o `App.jsx` fornece uma visão geral da aplicação
 
 ---
 
@@ -92,9 +93,9 @@ Para entender melhor a estrutura do projeto:
 Este projeto foi desenvolvido com finalidade educacional e está disponível para:
 
 - Estudo de arquitetura de aplicações web full-stack
-- Aprendizado de autenticação de usuários com JWT
+- Implementação de banco de dados e APIs REST
 - Implementação de CRUD básico
-- Exemplo de integração React com Node.js
+- Exemplo de integração React com Node.js e gerenciamento de estado simples
 
 Sinta-se livre para clonar, modificar e usar como base para seus próprios projetos de aprendizado!
 

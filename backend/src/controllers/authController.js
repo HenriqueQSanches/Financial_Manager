@@ -1,75 +1,39 @@
-const db = require('../config/database');
-const bcrypt = require('bcryptjs');
-const jwt = require('jsonwebtoken');
 const User = require('../models/User');
 
 class AuthController {
-    async login(req, res) {
-        const { email, password } = req.body;
-        
+    async getProfiles(req, res) {
         try {
-            const user = await User.findByEmail(email);
-            
-            if (!user) {
-                return res.status(401).json({ error: 'User not found' });
-            }
-
-            const isValidPassword = await bcrypt.compare(password, user.password);
-            if (!isValidPassword) {
-                return res.status(401).json({ error: 'Invalid password' });
-            }
-
-            const token = jwt.sign(
-                { userId: user.id, email: user.email },
-                process.env.JWT_SECRET,
-                { expiresIn: '24h' }
-            );
-
-            return res.json({ token, user: { id: user.id, name: user.name, email: user.email } });
+            const profiles = await User.findAll();
+            return res.json(profiles.map(p => p.toJSON()));
         } catch (error) {
-            return res.status(500).json({ error: 'Internal server error' });
+            console.error('Erro ao buscar perfis:', error);
+            return res.status(500).json({ error: 'Erro interno do servidor' });
         }
     }
 
-    async register(req, res) {
-        const { name, email, password } = req.body;
+    async createProfile(req, res) {
+        const { name } = req.body;
         
         try {
-            // Validações básicas
-            if (!name || !email || !password) {
-                return res.status(400).json({ error: 'Todos os campos são obrigatórios' });
-            }
-
-            // Validar formato do email
-            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-            if (!emailRegex.test(email)) {
-                return res.status(400).json({ error: 'Email inválido' });
+            if (!name) {
+                return res.status(400).json({ error: 'O nome é obrigatório' });
             }
 
             // Verificar se usuário já existe
-            const existingUser = await User.findByEmail(email);
+            const existingUser = await User.findByName(name);
             if (existingUser) {
-                return res.status(400).json({ error: 'Email já cadastrado' });
+                return res.status(400).json({ error: 'Perfil já cadastrado' });
             }
 
             // Criar novo usuário
-            const user = await User.create({ name, email, password });
+            const user = await User.create({ name });
 
-            // Gerar token
-            const token = jwt.sign(
-                { userId: user.id, email: user.email },
-                process.env.JWT_SECRET,
-                { expiresIn: '24h' }
-            );
-
-            // Retornar resposta sem a senha
             return res.status(201).json({
-                token,
                 user: user.toJSON()
             });
 
         } catch (error) {
-            console.error('Erro no registro:', error);
+            console.error('Erro no registro de perfil:', error);
             return res.status(500).json({ error: 'Erro interno do servidor' });
         }
     }

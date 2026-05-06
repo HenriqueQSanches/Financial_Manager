@@ -82,6 +82,38 @@ class TransactionRepository {
       });
     });
   }
+  static delete(userId, id) {
+    return new Promise((resolve, reject) => {
+      const sql = 'DELETE FROM transactions WHERE id = ? AND user_id = ?';
+      db.run(sql, [id, userId], function(err) {
+        if (err) return reject(err);
+        resolve(this.changes);
+      });
+    });
+  }
+
+  static update(userId, id, data) {
+    return new Promise((resolve, reject) => {
+      const sql = `
+        UPDATE transactions 
+        SET type = ?, amount = ?, date = ?, category = ?, description = ?
+        WHERE id = ? AND user_id = ?
+      `;
+      const params = [
+        data.type,
+        data.amount,
+        data.date,
+        data.category || null,
+        data.description || null,
+        id,
+        userId
+      ];
+      db.run(sql, params, function(err) {
+        if (err) return reject(err);
+        resolve(this.changes);
+      });
+    });
+  }
 }
 
 TransactionRepository.createTable()
