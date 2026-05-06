@@ -1,4 +1,4 @@
-![alt text](image.png)# Gerenciador Financeiro Simples
+Gerenciador Financeiro Simples
 
 Bem-vindo ao **Gerenciador Financeiro Simples**! Este é um aplicativo básico de gerenciamento financeiro, criado para fins de aprendizado e uso pessoal. Ele permite que você gerencie suas finanças de forma simples, organizadas por perfis individuais.
 
